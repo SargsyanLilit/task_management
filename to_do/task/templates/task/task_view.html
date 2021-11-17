@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To Do</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="{% static 'task/style.css' %}">
+
+</head>
+<body>
+
+<div class="center-column">
+
+
+	<div class="todo-list">
+	<h3>Tasks</h3>
+		<h2><strong>{{ task.title}}</strong></h2>
+		<br>
+		<br>
+		<h2>{{ task.description }}</h2>
+		<br>
+		<h2>{{ task.created_at }}</h2>
+		<br>
+		<h2>{{ task.get_status_display }}</h2>
+		<br>
+
+	<a class="btn btn-sm btn-info" href="{% url 'task-update' task.id %}">Update</a>
+		<a class="btn btn-sm btn-danger" href="{% url 'task-delete' task.id %}">Delete</a>
+
+
+
+	</div>
+</div>
+</body>
+</html>
+
+
+

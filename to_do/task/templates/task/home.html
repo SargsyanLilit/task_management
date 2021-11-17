@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To Do</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="{% static 'task/style.css' %}">
+
+</head>
+<body>
+
+<div class="center-column">
+
+
+	<div class="todo-list">
+	<h3>Tasks</h3>
+
+<!-- here is set up the task -->
+		{% for task in task_list %}
+			<div class="item-row">
+
+				<a class="btn btn-sm btn-info" href="{% url 'task-update' task.id %}">Update</a>
+				<a class="btn btn-sm btn-danger" href="{% url 'task-delete' task.id %}">Delete</a>
+				<!-- this a tag is for task special view -->
+				<a href="{% url 'task-view' task.id %}">{{ task.name }}</a>
+
+
+			</div>
+
+		{% endfor %}
+
+
+		<div class="item-row">
+				<!-- this is for create -->
+				<a href="{% url 'task-create' %}"><button class="btn btn-success" type="submit" name="Create Task">Create</button></a>
+		</div>
+	</div>
+</div>
+</body>
+</html>
+
+
+

@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To Do</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="{% static 'task/style.css' %}">
+
+</head>
+<body>
+
+<div class="center-column">
+		<h3>New Tasks</h3>
+		<form method="POST" >
+		<!-- here should be the form don't forget about csrf_token -->
+
+		<input class="btn btn-info" type="submit" name="Create Task">
+	</form>
+</div>
+</body>
+</html>
+
+
+
