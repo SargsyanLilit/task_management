@@ -1,11 +1,12 @@
 from django.shortcuts import render, HttpResponse, redirect
 from task.models import Task
+from task.forms import TaskForm, TaskUpdate
 
 # Create your views here.
 
 
 def home(request):
-    tasks = Task.objects.all()
+    tasks = Task.objects.all().order_by('-created_at')
     context = {
         'task_list': tasks
         }
@@ -27,19 +28,47 @@ def task_delete(request, task_id):
     try:
         Task.objects.filter(id=task_id).delete()
     except Task.DoesNotExist:
-        return redirect('/home/')
-    return redirect('/home/') # ?if the first slash is removed, it is redirected to i.e task-delete/id/home
+        return redirect('home')
+    return redirect('home')
 
 
 def task_update(request, task_id):
     try:
         task = Task.objects.get(id=task_id)
     except Task.DoesNotExist:
-        return redirect('home/')
-    return render(request, 'task/task_update.html', context={'task': task})
+        return redirect('home')
+
+    update_form = TaskUpdate(instance=task)
+
+    if request.method == 'POST':
+        update_form = TaskUpdate(request.POST, instance=task)
+        if update_form.is_valid():
+            update_form.save()
+            return redirect('home')
+
+    context = {
+        "form": update_form,
+    }
+
+    return render(request, 'task/task_update.html', context=context)
 
 
 def task_create(request):
+    create_form = TaskForm()
+    if request.method == 'POST':
+        #print(request.POST)
+        create_form = TaskForm(request.POST)
+        if create_form.is_valid():
+            #Task.object.create(**create_form.cleaned_data)
+            #print(create_form.cleaned_data)
+            name = create_form.cleaned_data['name']
+            description = create_form.cleaned_data['description']
+            status = create_form.cleaned_data['status']
+            Task.objects.create(name=name, description=description, status=status)
+            return redirect('home')
 
-    return render(request, 'task/new_task.html')
+    context = {
+        'form': create_form
+         }
+    return render(request, 'task/new_task.html', context=context)
 

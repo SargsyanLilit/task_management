@@ -1,14 +1,10 @@
 from django.db import models
+from helpers.choices import STATUS_CHOICES
 
 # Create your models here.
 
 
 class Task(models.Model):
-    STATUS_CHOICES = (
-        (0, 'New'),
-        (1, 'Doing'),
-        (2, 'Done')
-    )
 
     name = models.CharField(max_length=50)
     description = models.TextField(null=True, blank=True)
