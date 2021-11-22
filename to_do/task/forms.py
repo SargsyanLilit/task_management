@@ -22,3 +22,10 @@ class TaskUpdate(forms.ModelForm):
     class Meta:
         model = Task
         fields = ['name', 'description', 'status']
+
+
+class TaskUpdateForm(forms.Form):
+    description = forms.CharField(max_length=1000, required=False)
+    status = forms.ChoiceField(choices=STATUS_CHOICES, required=False)
+
+

@@ -1,0 +1,21 @@
+{% extends 'task/base.html' %}
+
+{% block content %}
+
+<div class="center-column">
+
+
+	<div class="todo-list">
+	<h3>User Login</h3>
+		<form method="POST" >
+            {% csrf_token %}
+            {{ form }}
+			<input class="btn btn-info" type="submit" name="Login">
+		</form>
+
+
+	</div>
+</div>
+{% endblock content %}
+
+

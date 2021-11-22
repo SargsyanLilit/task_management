@@ -1,0 +1,28 @@
+{% extends 'task/base.html' %}
+
+{% block content %}
+
+<div class="center-column">
+
+
+	<div class="todo-list">
+		<a href="{% url 'user-logout' %}"><button class="btn btn-danger" type="submit" name="Logout">Logout</button></a>
+
+		<br>
+
+		<h3>User</h3>
+
+		<h2><strong>{{ request.user.username }}</strong></h2>
+
+		<br>
+
+		<a class="btn btn-sm btn-info" href="{% url 'user-update'%}">Update</a>
+
+	</div>
+</div>
+
+
+{% endblock content %}
+
+
+
